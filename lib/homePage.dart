@@ -1,24 +1,83 @@
 // ignore_for_file: file_names
 
+import 'package:first_app/details.dart';
 import 'package:flutter/material.dart';
-// ignore: unnecessary_import
-import 'package:flutter/rendering.dart';
 
-// ignore: camel_case_types
 class homPage extends StatefulWidget {
-  const homPage({super.key});
-
   @override
   State<homPage> createState() => _homPageState();
 }
 
-// ignore: camel_case_types
 class _homPageState extends State<homPage> {
+  List categories = [
+    {"iconName": Icons.laptop, "Title": "Laptop"},
+    {"iconName": Icons.phone_android, "Title": "Phone"},
+    {"iconName": Icons.pedal_bike, "Title": "Bike"},
+    {"iconName": Icons.electric_car, "Title": "Cars"},
+    {"iconName": Icons.watch_rounded, "Title": "Watch"},
+    {"iconName": Icons.monitor, "Title": "Monitor"},
+  ];
+
+  List product = [
+    {
+      "image": "images/android.png",
+      "Title": "S26 Ultra",
+      "subTitle": "Description 1 and",
+      "price": "760\$",
+    },
+    {
+      "image": "images/watch.png",
+      "Title": "Huawei Watch",
+      "subTitle": "Description 1 and",
+      "price": "200\$",
+    },
+    {
+      "image": "images/iphone.png",
+      "Title": "iphone 15 Pro",
+      "subTitle": "Description 1 and",
+      "price": "1000\$",
+    },
+    {
+      "image": "images/watch2.png",
+      "Title": "Watch 2 ",
+      "subTitle": "Description 1 and",
+      "price": "100\$",
+    },
+
+    {
+      "image": "images/watch.png",
+      "Title": "Huawei Watch",
+      "subTitle": "Description 1 and",
+      "price": "200\$",
+    },
+    {
+      "image": "images/iphone.png",
+      "Title": "iphone 15 Pro",
+      "subTitle": "Description 1 and",
+      "price": "1000\$",
+    },
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        iconSize: 35,
+        selectedItemColor: Colors.orangeAccent,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: "*"),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_bag_outlined),
+            label: "*",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_2_outlined),
+            label: "*",
+          ),
+        ],
+      ),
       body: Container(
         padding: EdgeInsets.all(20),
+        color: Colors.orangeAccent[200],
         child: ListView(
           children: [
             Row(
@@ -26,8 +85,10 @@ class _homPageState extends State<homPage> {
                 Expanded(
                   child: TextFormField(
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.search),
-                      hint: Text("search"),
+                      prefixIcon: Icon(Icons.search, size: 30),
+                      hintText: "Search",
+
+                      hintStyle: TextStyle(color: Colors.grey, fontSize: 20),
                       border: InputBorder.none,
                       fillColor: Colors.grey[200],
                       filled: true,
@@ -35,249 +96,116 @@ class _homPageState extends State<homPage> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 10),
+                  padding: EdgeInsets.only(left: 10),
                   child: Icon(Icons.menu, size: 40),
                 ),
               ],
             ),
-
-            Container(
-              width: 500,
-              height: 85,
-              padding: EdgeInsets.only(left: 10, top: 40, bottom: 0),
-              child: Text(
-                "Categories",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
+            SizedBox(height: 35),
+            Text(
+              "Cataegories",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
-
+            SizedBox(height: 10),
             Container(
               height: 100,
-              child: ListView(
+              child: ListView.builder(
+                itemCount: categories.length,
                 scrollDirection: Axis.horizontal,
-                children: [
-                  Container(
+                itemBuilder: (context, i) {
+                  return Container(
                     margin: EdgeInsets.only(right: 10),
                     child: Column(
                       children: [
                         Container(
-                          padding: EdgeInsets.all(15),
-
                           decoration: BoxDecoration(
                             color: Colors.grey[200],
-                            borderRadius: BorderRadius.circular(40),
+                            borderRadius: BorderRadius.circular(100),
                           ),
-
-                          child: Icon(Icons.laptop, size: 40),
+                          child: Icon(categories[i]["iconName"], size: 35),
+                          padding: EdgeInsets.all(15),
                         ),
-                        Container(
-                          padding: EdgeInsets.only(top: 5),
-                          child: Text(
-                            "Laptop",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                            ),
+                        Text(
+                          categories[i]["Title"],
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
                           ),
                         ),
                       ],
                     ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(right: 10),
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(15),
-
-                          decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            borderRadius: BorderRadius.circular(40),
-                          ),
-
-                          child: Icon(Icons.phone_android, size: 40),
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(top: 5),
-                          child: Text(
-                            "Mobile",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(right: 10),
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(15),
-
-                          decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            borderRadius: BorderRadius.circular(40),
-                          ),
-
-                          child: Icon(Icons.watch, size: 40),
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(top: 5),
-                          child: Text(
-                            "Watch",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(right: 10),
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(15),
-
-                          decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            borderRadius: BorderRadius.circular(40),
-                          ),
-
-                          child: Icon(Icons.monitor, size: 40),
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(top: 5),
-                          child: Text(
-                            "Monitor",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(right: 10),
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(15),
-
-                          decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            borderRadius: BorderRadius.circular(40),
-                          ),
-
-                          child: Icon(Icons.card_giftcard, size: 40),
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(top: 5),
-                          child: Text(
-                            "Gifts",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(right: 10),
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(15),
-
-                          decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            borderRadius: BorderRadius.circular(40),
-                          ),
-
-                          child: Icon(Icons.bike_scooter, size: 40),
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(top: 5),
-                          child: Text(
-                            "Bike",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                  );
+                },
               ),
             ),
-            Container(
-              width: 500,
-              height: 85,
-              padding: EdgeInsets.only(left: 10, top: 40, bottom: 0),
-              child: Text(
-                "Categories",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
+            Text(
+              "Best Selling",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
-            GridView(
+            GridView.builder(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                mainAxisExtent:
+                    250, // ارتفاع البطاقة الآن أكبر لتناسب الصور والنص
               ),
-              children: [
-                Card(
-                  child: Column(
-                    children: [
-                      Container(
-                        color: Colors.grey[200],
-                        child: Image.asset("images/android.png"),
-                      ),
-                    ],
+              itemCount: product.length,
+              itemBuilder: (context, i) {
+                return InkWell(
+                  onTap:(){
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ItemsDetails(data:product[i])));
+                  } ,
+                  child: Card(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 130, // نفس ارتفاع الصورة
+                          padding: const EdgeInsets.all(10),
+                          child: Image.asset(
+                            product[i]['image'],
+                            width: double.infinity,
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          product[i]["Title"],
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                        const Divider(
+                          thickness: 1, // سمك الخط
+                          color: Colors.grey, // لون الخط
+                          indent: 20, // مسافة من اليسار
+                          endIndent: 20, // مسافة من اليمين
+                        ),
+                        Text(
+                          product[i]["subTitle"],
+                  
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            product[i]["price"],
+                            style: TextStyle(
+                              color: Colors.orange,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Card(
-                  child: Column(
-                    children: [
-                      Container(
-                        color: Colors.grey[200],
-                        child: Image.asset("images/android.png"),
-                      ),
-                    ],
-                  ),
-                ),
-                Card(
-                  child: Column(
-                    children: [
-                      Container(
-                        color: Colors.grey[200],
-                        child: Image.asset("images/android.png"),
-                      ),
-                    ],
-                  ),
-                ),
-                Card(
-                  child: Column(
-                    children: [
-                      Container(
-                        color: Colors.grey[200],
-                        child: Image.asset("images/android.png"),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+                );
+              },
             ),
           ],
         ),
